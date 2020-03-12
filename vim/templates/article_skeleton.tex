@@ -1,0 +1,125 @@
+\documentclass[11pt,oneside]{article}
+
+\newcommand{\titleOfAll}{Title}
+\newcommand{\nameOfAuthor}{Paul de Lange}
+\newcommand{\emailOfAuthor}{p.delange@uky}
+\newcommand{\insitutionOfAuthor}{Bla}
+\newcommand{\pathOfImages}{./images/}
+
+\usepackage{graphicx,amsmath,amsfonts,amsthm,amssymb,hyperref,fancyhdr,setspace}
+
+\newcommand{\al}{\begin{align*}} 
+\newcommand{\eal}{\end{align*}} 
+
+\newcommand{\be}{\begin{equation}} 
+\newcommand{\ee}{\end{equation}} 
+
+\newcommand{\eq}[1]{(\ref{#1})} 
+\newcommand{\bem}{\begin{pmatrix}} 
+\newcommand{\eem}{\end{pmatrix}} 
+
+\newcommand{\RR}{{\mathbb R}}%Reals
+\newcommand{\RRm}{\RR^{\times}}%non-zero real
+\newcommand{\RRp}{\RR^+}%positive real
+\newcommand{\CC}{{\mathbb C}}%Complex
+\newcommand{\CCm}{\CC^{\times}}%non-zero complex
+\newcommand{\PP}{{\mathbb P}}%Projective
+\newcommand{\ZZ}{{\mathbb Z}}%Integers
+\newcommand{\ZZp}{\ZZ^+}%Positive integers
+\newcommand{\ZZm}{\ZZ^{-}}%Negative integers
+\newcommand{\ZZx}{\ZZ^{\times}}%non-zero integers
+\newcommand{\N}{{\mathbb N}}%Natural numbers
+\newcommand{\QQ}{{\mathbb Q}}%Rationals
+\newcommand{\QQm}{{\mathbb Q}^{\times}}%non-zero rationals
+\newcommand{\QQp}{{\mathbb Q}^+}%positive rationals
+\newcommand{\QQc}{\overline{\QQ}}%Algebraic closure of the rationals
+\newcommand{\OO}{{\mathbb O}}%Octonions
+\newcommand{\HH}{{\mathbb H}}%quaternions
+\newcommand{\FF}{{\mathbb F}}%finite field
+
+\newcommand{\PSL}{\operatorname{\textsl{PSL}}}    %PSL group
+\newcommand{\SL}{\operatorname{\textsl{SL}}}      %SL group
+\newcommand{\Sp}{\operatorname{\textsl{Sp}}}      %Sp group
+\newcommand{\PGL}{\operatorname{\textsl{PGL}}}    %PGL group
+\newcommand{\AGL}{{\textsl{AGL}}}    %AGL group
+\newcommand{\GL}{{\textsl{GL}}}      %GL group
+\newcommand{\SU}{\operatorname{\textsl{SU}}}    %SU group
+\newcommand{\SO}{\operatorname{\textsl{SO}}}    %SO group
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{conj}[thm]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{rmk}[thm]{Remark}
+%\newtheorem*{rmk}{Remark}
+
+\numberwithin{equation}{section}
+%\numberwithin{equation}{subsubsection}
+\newtheorem*{eg}{Example}
+
+%--------------------------------%
+
+\pagestyle{fancy}
+
+\addtolength{\headheight}{1.7pt}
+
+\fancyhf{} \fancyhead[C]{\titleOfAll
+}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\graphicspath{ {\pathOfImages} }
+
+%--------------------------------%
+
+
+\begin{document}
+
+\setstretch{1.4}
+
+\title{
+\vspace{-35pt}
+\textsc{\titleOfAll}
+}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}} 
+   
+\renewcommand{\thefootnote}{\arabic{footnote}} 
+
+\author{
+	\nameOfAuthor\footnote{
+	\insitutionOfAuthor
+	\newline\indent\indent
+	{\em E-mail:} {\tt \emailOfAuthor}
+	}
+}
+
+\maketitle
+\abstract{
+
+
+
+draft
+
+
+
+}
+
+
+
+\clearpage
+
+\tableofcontents
+
+\clearpage
+
+\section{Introduction}
+
+hello
+
+\end{document}

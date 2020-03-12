@@ -1,0 +1,43 @@
+\documentclass[10pt]{letter}
+
+\usepackage{geometry}
+
+%\longindentation=0pt % Un-commenting this line will push the closing "Sincerely," to the left of the page
+
+\geometry{
+	paper=a4paper, % Change to letterpaper for US letter
+	top=3cm, % op margin
+	bottom=1.5cm, % Bottom margin
+	left=4.5cm, % Left margin
+	right=4.5cm, % Right margin
+	%showframe, % Uncomment to show how the type block is set on the page
+}
+
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage[utf8]{inputenc} % Required for inputting international characters
+
+\usepackage{stix} % Use the Stix font by default
+
+\usepackage{microtype} % Improve justification
+
+
+\signature{John Smith}
+\address{123 Broadway \\ City, State 12345 \\ (000) 111-1111} % Your address and phone number
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\begin{letter}{Nathan Drake \\ LaTeXTemplates.com \\ 321 Pleasant Lane \\ City, State 12345} % Name/title of the addressee
+
+\opening{\textbf{Dear Sir or Madam,}}
+
+\vspace{2\parskip}
+\closing{Sincerely,}
+\vspace{2\parskip}
+
+\ps{P.S. }
+
+\end{letter}
+ 
+\end{document}

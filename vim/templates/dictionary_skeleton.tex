@@ -1,0 +1,25 @@
+\documentclass{article}
+
+\usepackage{palatino} % Use the Palatino font
+\usepackage{microtype} % Improves spacing
+\usepackage{textgreek}
+
+\newcommand*{\glossaryname}{Dictionary\vspace{2cm}}
+\usepackage[style=long]{glossaries}
+\newcommand{\di}[2]{%
+  \newglossaryentry{#1}{name=#1,
+  description={#2\vspace{6pt}}}%
+}
+
+\setlength{\glsdescwidth}{\textwidth}
+
+\makenoidxglossaries
+
+\di{test}{true}
+
+\begin{document}
+\glsaddall
+
+\printnoidxglossary[nonumberlist,sort=nocase, style=altlist]
+
+\end{document}

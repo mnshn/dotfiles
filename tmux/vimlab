@@ -1,0 +1,24 @@
+# Vimlab creation script for macOS. Inspired on Alex Kieft's thing.
+
+new
+source-file ~/.tmux.conf
+# Split window into two panes
+splitw -h -p 30 
+# Start up MATLAB in one pane
+send-keys 'clear' Enter
+send-keys '/Applications/MATLAB_R2019a.app/bin/matlab -nodesktop -nosplash' Enter
+
+# Switch to other pane, and display a friendly greeting
+selectp -t 0
+send-keys 'clear' Enter
+send-keys 'nvim' Enter
+
+# Set C-c for send current visual selection to matlab
+bind C-c run-shell "tmux set-buffer \"$(pbpaste)\;\"; tmux send-keys C-c; tmux paste-buffer -t %1; tmux send-keys -t %1 Enter"
+
+# Set C-f for run current file in matlab
+bind C-f run-shell "tmux send-keys C-f; sleep 0.1; tmux set-buffer \"$(pbpaste)\;\"; tmux send-keys -t %1 run Space; tmux paste-buffer -t %1; tmux send-keys -t %1 Enter"
+
+# Set Title 
+set-option -g set-titles on
+set-option -g set-titles-string 'VIMLAB'
