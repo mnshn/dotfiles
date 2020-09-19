@@ -2,7 +2,7 @@ set nocompatible            " disable compatibility to old-time vi
 set completeopt=menuone,noselect,noinsert "nicer popup menu for completions
 set shortmess+=c            " shorter hit Enter messages
 set showmatch               " show matching brackets.
-set ignorecase              " case insensitive matching
+" set ignorecase              " case insensitive matching
 set wrap                    " wrap visually, not actually
 set hlsearch                " highlight search results
 set tabstop=2               " number of default columns occupied by a tab character
@@ -42,21 +42,25 @@ Plug 'ncm2/ncm2-racer'
 " Plug 'sebastianmarkow/deoplete-rust'
 
 "PYTHON
-Plug 'ncm2/ncm2'
+" Plug 'ncm2/ncm2'
 Plug 'nvie/vim-flake8'
 Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-jedi'
+Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'ncm2/ncm2-bufword'
+" Plug 'ncm2/ncm2-path'
+" Plug 'ncm2/ncm2-jedi'
 Plug 'Vimjas/vim-python-pep8-indent'
-" Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 " Plug 'fisadev/vim-isort'
 Plug 'vim-syntastic/syntastic'
 " Plug 'vim-python/python-syntax'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+" Plug 'zchee/deoplete-jedi'
 
+Plug 'Shougo/deoplete.nvim'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "JAVASCRIPT
-Plug 'maksimr/vim-jsbeautify'
+" Plug 'maksimr/vim-jsbeautify'
 Plug 'pangloss/vim-javascript'
 Plug 'carlitux/deoplete-ternjs'
 
@@ -69,9 +73,15 @@ Plug 'lervag/vimtex'
 Plug 'raingo/vim-matlab'
 
 "GENERAL
+Plug 'majutsushi/tagbar'
+Plug 'yegappan/taglist'
+Plug 'airblade/vim-gitgutter'
+Plug 'machakann/vim-highlightedyank'
 " Plug 'dominikduda/vim_current_word', { 'for': ['matlab']}
+" Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
-Plug 'sbdchd/neoformat'
+Plug 'tpope/vim-rhubarb'
+" Plug 'sbdchd/neoformat'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -108,7 +118,7 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 
 "HTML
 "
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 
 "COLOR SCHEMES
 "Plug 'lifepillar/vim-solarized8'
@@ -124,6 +134,8 @@ colorscheme OceanicNext
 " colorscheme tequila-sunrise
 
 " ######################################################
+"
+let Tlist_Use_Right_Window = 1
 
 let g:syntastic_mode_map = {
     \ "mode": "passive",
@@ -163,26 +175,35 @@ let g:ale_rust_cargo_use_check = 1
 
 let g:neoformat_only_msg_on_error = 1
 
-let g:jedi#auto_initialization = 1
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#completions_command = ""
-let g:jedi#show_call_signatures = "1"
+" let g:jedi#auto_initialization = 1
+" let g:jedi#completions_enabled = 0
+" let g:jedi#auto_vim_configuration = 0
+" let g:jedi#smart_auto_mappings = 0
+" let g:jedi#popup_on_dot = 0
+" let g:jedi#completions_command = ""
+" let g:jedi#show_call_signatures = "1"
 
-let ncm2#popup_delay = 5
-let ncm2#complete_length = [[1, 1]]
+let g:deoplete#enable_at_startup = 1
 
-let g:ncm2#matcher = 'substrfuzzy'
+
+" let ncm2#popup_delay = 5
+" let ncm2#complete_length = [[1, 1]]
+
+" let g:ncm2#matcher = 'substrfuzzy'
 
 let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_github=1
 let vim_markdown_preview_browser='Google Chrome'
 
+let g:tagbar_compact = 1
+
 autocmd InsertEnter,InsertLeave * set cul!
 autocmd FileType javascript set formatprg=prettier\ --stdin
-autocmd BufEnter * call ncm2#enable_for_buffer()
+" autocmd BufEnter * call ncm2#enable_for_buffer()
+
+nmap gP :TlistToggle<CR>
+nmap gO :TagbarToggle<CR>
+nmap U <C-R>
 
 vmap i <Esc>i
 "
@@ -218,10 +239,10 @@ endif
 
 "Neoformat
 
-augroup fmt
-  autocmd!
-  autocmd BufWritePre *.m undojoin | Neoformat
-augroup END
+" augroup fmt
+"   autocmd!
+"   autocmd BufWritePre *.m undojoin | Neoformat
+" augroup END
 
 autocmd BufNewFile,BufRead *.tex setlocal spell spelllang=en_us
 autocmd BufNewFile,BufRead *.md setlocal spell spelllang=en_us
@@ -229,7 +250,17 @@ autocmd BufNewFile,BufRead *.md setlocal spell spelllang=en_us
 autocmd FileType matlab setlocal commentstring=%\ %s
 
 autocmd FileType python nnoremap <buffer> <C-y> :exec '!python' shellescape(@%, 1)<CR>
-autocmd FileType rust nnoremap <buffer> <C-y> :exec '!cargo run' shellescape(@%, 1)<CR>
+autocmd FileType rust nnoremap <buffer> <C-y> :exec '!cargo build'<CR>
+autocmd FileType rust nnoremap gy :exec '!cargo test'<CR>
+autocmd FileType rust nnoremap gY :exec '!cargo test -- --nocapture'<CR>
 autocmd FileType tex nnoremap <buffer> <C-y> :VimtexCompile<CR>
 
 autocmd CursorMoved *.m exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+
+nmap <C-n> :TagbarToggle<CR>
+
+nmap gS :! scp % pdelange@storm.motulus.com:/home/pdelange/scripts && ssh pdelange@storm.motulus.com source /home/pdelange/run.sh %<CR>
+
+nmap gC :tabnew ~/.config/nvim/init.vim<CR>
+
+" ; source /home/vince/opt/gurobi_env.sh; pip; cd /home/pdelange/scripts; PYTHONPATH=$PYTHONPATH BASE_DIR=${BASE_DIR}; pip list; python3 -u %" ENDSSH<CR>
