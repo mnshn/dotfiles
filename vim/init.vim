@@ -1,5 +1,5 @@
 set nocompatible            " disable compatibility to old-time vi
-set completeopt=menuone,noselect,noinsert "nicer popup menu for completions
+set completeopt=menuone,noselect,noinsert,longest "nicer popup menu for completions
 set shortmess+=c            " shorter hit Enter messages
 set showmatch               " show matching brackets.
 " set ignorecase              " case insensitive matching
@@ -13,7 +13,7 @@ set autoindent              " indent a new line the same amount as the line just
 set number                  " add line numbers
 set wildmode=longest,list   " get bash-like tab completions
 set autochdir               " sets working dir = edit dir
-set textwidth=80
+set textwidth=88
 set splitbelow
 set splitright
 set spelllang=en_us
@@ -27,7 +27,7 @@ set t_Co=256
 set nobackup
 set noswapfile
 filetype plugin indent on   " allows auto-indenting depending on file type
-syntax on                   " syntax highlighting
+syntax enable                   " syntax highlighting
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -35,176 +35,63 @@ endfunction
 
 call plug#begin()
 
-"RUST
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'ncm2/ncm2-racer'
-" Plug 'sebastianmarkow/deoplete-rust'
-
-"PYTHON
-" Plug 'ncm2/ncm2'
-Plug 'nvie/vim-flake8'
-Plug 'roxma/nvim-yarp'
-Plug 'deoplete-plugins/deoplete-jedi'
-" Plug 'ncm2/ncm2-bufword'
-" Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-jedi'
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'davidhalter/jedi-vim'
-" Plug 'fisadev/vim-isort'
-Plug 'vim-syntastic/syntastic'
-" Plug 'vim-python/python-syntax'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-" Plug 'zchee/deoplete-jedi'
-
-Plug 'Shougo/deoplete.nvim'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"JAVASCRIPT
-" Plug 'maksimr/vim-jsbeautify'
-Plug 'pangloss/vim-javascript'
-Plug 'carlitux/deoplete-ternjs'
-
-"TEX
-Plug 'lervag/vimtex'
-"Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
-"Plug 'matze/vim-tex-fold'
-
-"MATLAB
-Plug 'raingo/vim-matlab'
-
 "GENERAL
 Plug 'majutsushi/tagbar'
 Plug 'yegappan/taglist'
 Plug 'airblade/vim-gitgutter'
 Plug 'machakann/vim-highlightedyank'
-" Plug 'dominikduda/vim_current_word', { 'for': ['matlab']}
-" Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-rhubarb'
-" Plug 'sbdchd/neoformat'
-Plug 'kien/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'valloric/MatchTagAlways'
 Plug 'tpope/vim-commentary'
 Plug 'dense-analysis/ale'
+Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-fugitive'
-Plug 'JamshedVesuna/vim-markdown-preview'
-" Plug 'elzr/vim-json'
-" Plug 'tmux-plugins/vim-tmux-focus-events'
-" Plug 'roxma/vim-tmux-clipboard'
-" Plug 'jiangmiao/auto-pairs'
+"completion
+Plug 'Shougo/deoplete.nvim'
+"search
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
-"PRETTIER
-" Plug 'prettier/vim-prettier', {
-"   \ 'do': 'yarn install',
-"   \ 'branch': 'release/1.x',
-"   \ 'for': [
-"     \ 'javascript',
-"     \ 'typescript',
-"     \ 'css',
-"     \ 'less',
-"     \ 'scss',
-"     \ 'json',
-"     \ 'graphql',
-"     \ 'markdown',
-"     \ 'vue',
-"     \ 'lua',
-"     \ 'php',
-"     \ 'python',
-"     \ 'ruby',
-"     \ 'html',
-"     \ 'swift'] }
+"PYTHON
+"completion
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'davidhalter/jedi-vim'
+"syntax highlights
+Plug 'numirias/semshi'
 
-"HTML
-"
-" Plug 'mattn/emmet-vim'
+"JAVASCRIPT
+"completion
+Plug 'carlitux/deoplete-ternjs'
+"syntax highlights
+Plug 'pangloss/vim-javascript'
 
 "COLOR SCHEMES
-"Plug 'lifepillar/vim-solarized8'
 Plug 'mhartington/oceanic-next'
-" Plug 'morhetz/gruvbox'
-" Plug 'levelone/tequila-sunrise.vim'
+
+"TEX
+Plug 'lervag/vimtex'
+
+"RUST
+"completion
+Plug 'sebastianmarkow/deoplete-rust'
+Plug 'rust-lang/rust.vim'
+
+"MARKDOWN
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
 colorscheme OceanicNext
-"colorscheme gruvbox
-"colorscheme solarized8
-" colorscheme tequila-sunrise
 
-" ######################################################
-"
-let Tlist_Use_Right_Window = 1
+let g:python3_host_prog ='/usr/bin/python3'
+let g:python2_host_prog ='/usr/bin/python2'
 
-let g:syntastic_mode_map = {
-    \ "mode": "passive",
-    \ "active_filetypes": ["rust"],
-    \ "passive_filetypes": [] }
-
-let python_highlight_all=1
-
-let g:tex_flavor  = 'latex'
-let g:tex_conceal = ''
-let g:vimtex_view_general_viewer = 'open -a Skim'
-let g:vimtex_view_general_options = '-r @line @pdf @tex'
-"let g:vimtex_fold_manual = 1
-"let g:tex_fold_override_foldtext = 1
-"let g:tex_fold_enabled = 1
-let g:vimtex_fold_enabled = 1
-let g:vimtex_latexmk_continuous = 1
-let g:vimtex_compiler_progname = 'nvr'
-let g:vimtex_quickfix_open_on_warning = 0
-"let g:livepreview_previewer = 'open -a Skim'
-
-let g:prettier#config#semi = 'false'
-let g:prettier#config#single_quote = 'true'
-
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-"let g:netrw_browse_split = 2
-"let g:netrw_altv = 1
-let g:netrw_winsize = 25
-let g:netrw_localrmdir='rm -rf'
-let g:netrw_keepdir=0
-
-let g:ale_linters = {'javascript': ['eslint'], 'matlab': ['mlint'], 'python': ['flake8'], 'rust': ['rustc']}
-let g:ale_fixers = {'javascript': ['eslint'], 'python': ['yapf', 'autopep8'], 'css': ['prettier'], 'html': ['prettier'], 'rust': ['rustfmt']}
-let g:ale_fix_on_save = 1
-let g:ale_rust_cargo_use_check = 1
-
-let g:neoformat_only_msg_on_error = 1
-
-" let g:jedi#auto_initialization = 1
-" let g:jedi#completions_enabled = 0
-" let g:jedi#auto_vim_configuration = 0
-" let g:jedi#smart_auto_mappings = 0
-" let g:jedi#popup_on_dot = 0
-" let g:jedi#completions_command = ""
-" let g:jedi#show_call_signatures = "1"
-
-let g:deoplete#enable_at_startup = 1
-
-
-" let ncm2#popup_delay = 5
-" let ncm2#complete_length = [[1, 1]]
-
-" let g:ncm2#matcher = 'substrfuzzy'
-
-let vim_markdown_preview_hotkey='<C-m>'
-let vim_markdown_preview_github=1
-let vim_markdown_preview_browser='Google Chrome'
-
-let g:tagbar_compact = 1
-
-autocmd InsertEnter,InsertLeave * set cul!
-autocmd FileType javascript set formatprg=prettier\ --stdin
-" autocmd BufEnter * call ncm2#enable_for_buffer()
-
-nmap gP :TlistToggle<CR>
-nmap gO :TagbarToggle<CR>
+"GENERAL KEYS
 nmap U <C-R>
-
 vmap i <Esc>i
 "
 " tab ipv % voor parenmatch
@@ -216,16 +103,92 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Completion
+
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+
 nnoremap <space> za
 
-"MATLAB-VIM bindings
-autocmd FileType matlab source ~/.config/nvim/matlab.vim
-
-" Clipboard yank
 vmap Y "*y
 
-"SKELETONS
+map j gj
+map k gk
 
+nmap <C-c> :tabnew ~/.config/nvim/init.vim<CR>
+
+nmap gb <C-w>s<C-w>
+
+nmap ++ :res +10<CR>
+nmap -- :res -10<CR>
+nmap -+ :vertical res +10<CR>
+nmap -= :vertical res -10<CR>
+
+"COMPILE
+autocmd FileType python nnoremap <buffer> <C-y> :exec '!python' shellescape(@%, 1)<CR>
+autocmd FileType rust nnoremap <buffer> <C-y> :exec '!cargo run'<CR>
+autocmd FileType rust nnoremap gy :exec '!cargo test'<CR>
+autocmd FileType rust nnoremap gY :exec '!cargo test -- --nocapture'<CR>
+autocmd FileType tex nnoremap <buffer> <C-y> :VimtexCompile<CR>
+
+"ALE
+let g:ale_linters = {'javascript': ['eslint'], 'python': ['flake8'], 'rust': ['rustc']}
+let g:ale_fixers = {'javascript': ['eslint'], 'python': ['black']}
+let g:ale_fix_on_save = 1
+let g:ale_rust_cargo_use_check = 1
+
+"SYNTAX
+"deoplete
+let g:deoplete#enable_at_startup = 1
+autocmd FileType mail setlocal wrap linebreak nolist textwidth=0 wrapmargin=0
+autocmd FileType text setlocal wrap linebreak nolist textwidth=0 wrapmargin=0
+
+"syntastic
+set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_rust_checkers = ['cargo']
+
+let g:syntastic_mode_map = {
+    \ "mode": "passive",
+    \ "active_filetypes": ["rust"],
+    \ "passive_filetypes": [] }
+
+"RUST
+let g:deoplete#sources#rust#racer_binary='/home/paul/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='/home/paul/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src/'
+
+let g:rustfmt_autosave = 1
+
+"TAGBAR/LIST
+let g:tagbar_compact = 1
+nmap <C-t> :TagbarToggle<CR>
+
+"FZF
+nmap <C-p> :FZF<CR>
+nnoremap <C-a> :Ag<CR>
+
+"SPELL
+autocmd BufNewFile,BufRead *.tex setlocal spell spelllang=en_us
+autocmd BufNewFile,BufRead *.md setlocal spell spelllang=en_us
+
+"MOTULUS
+nmap <C-s> :! scp % pdelange@storm.motulus.com:/home/pdelange/scripts && ssh pdelange@storm.motulus.com source /home/pdelange/run.sh %<CR>
+
+
+"TEX
+let g:tex_flavor  = 'latex'
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_fold_enabled = 1
+let g:vimtex_compiler_progname = 'nvr'
+let g:vimtex_quickfix_open_on_warning = 0
+
+"SKELETONS
 if has("autocmd")
   augroup templates
     autocmd BufNewFile *.sh 0r ~/.config/nvim/templates/skeleton.sh
@@ -237,30 +200,4 @@ if has("autocmd")
   augroup END
 endif
 
-"Neoformat
 
-" augroup fmt
-"   autocmd!
-"   autocmd BufWritePre *.m undojoin | Neoformat
-" augroup END
-
-autocmd BufNewFile,BufRead *.tex setlocal spell spelllang=en_us
-autocmd BufNewFile,BufRead *.md setlocal spell spelllang=en_us
-
-autocmd FileType matlab setlocal commentstring=%\ %s
-
-autocmd FileType python nnoremap <buffer> <C-y> :exec '!python' shellescape(@%, 1)<CR>
-autocmd FileType rust nnoremap <buffer> <C-y> :exec '!cargo build'<CR>
-autocmd FileType rust nnoremap gy :exec '!cargo test'<CR>
-autocmd FileType rust nnoremap gY :exec '!cargo test -- --nocapture'<CR>
-autocmd FileType tex nnoremap <buffer> <C-y> :VimtexCompile<CR>
-
-autocmd CursorMoved *.m exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-
-nmap <C-n> :TagbarToggle<CR>
-
-nmap gS :! scp % pdelange@storm.motulus.com:/home/pdelange/scripts && ssh pdelange@storm.motulus.com source /home/pdelange/run.sh %<CR>
-
-nmap gC :tabnew ~/.config/nvim/init.vim<CR>
-
-" ; source /home/vince/opt/gurobi_env.sh; pip; cd /home/pdelange/scripts; PYTHONPATH=$PYTHONPATH BASE_DIR=${BASE_DIR}; pip list; python3 -u %" ENDSSH<CR>

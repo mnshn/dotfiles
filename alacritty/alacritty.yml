@@ -1,45 +1,97 @@
+env:
+  TERM: xterm-256color
+
+
+  # Colors (Gruvbox dark)
 colors:
   # Default colors
   primary:
-    background: '0x020221'
-    foreground: '0xb4b4b9'
-
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '0x020221'
-    cursor: '0xffe8c0'
+    # hard contrast: background = '#1d2021'
+    background: '#282828'
+    # soft contrast: background = '#32302f'
+    foreground: '#ebdbb2'
 
   # Normal colors
   normal:
-    black:   '0x000004'
-    red:     '0xff3600'
-    green:   '0x718e3f'
-    yellow:  '0xffc552'
-    blue:    '0x635196'
-    magenta: '0xff761a'
-    cyan:    '0x34bfa4'
-    white:   '0xb4b4b9'
+    black:   '#282828'
+    red:     '#cc241d'
+    green:   '#98971a'
+    yellow:  '#d79921'
+    blue:    '#458588'
+    magenta: '#b16286'
+    cyan:    '#689d6a'
+    white:   '#a89984'
 
   # Bright colors
   bright:
-    black:   '0x020221'
-    red:     '0xff8e78'
-    green:   '0xb1bf75'
-    yellow:  '0xffd392'
-    blue:    '0x99a4bc'
-    magenta: '0xffb07b'
-    cyan:    '0x8bccbf'
-    white:   '0xf8f8ff'
+    black:   '#928374'
+    red:     '#fb4934'
+    green:   '#b8bb26'
+    yellow:  '#fabd2f'
+    blue:    '#83a598'
+    magenta: '#d3869b'
+    cyan:    '#8ec07c'
+    white:   '#ebdbb2'
+
 
 font:
-  family: DejaVu Sans Mono
-  style: Book
-  bold_style: Bold
-  italic_style: Italic
-  # Point size of the font
-  size: 12
-  # Offset is the extra space around each character. offset.y can be thought of
-  # as modifying the linespacing, and offset.x as modifying the letter spacing.
+  normal:
+    family: DejaVu Sans Mono
+    style: Regular
+
+  bold:
+    family: DejaVu Sans Mono
+    style: Bold
+
+  italic:
+    family: DejaVu Sans Mono
+    style: Italic
+
+  size: 10.0
+
   offset:
     x: 0
-    y: -2
+    y: 0
+
+  glyph_offset:
+    x: 0
+    y: 0
+
+  scale_with_dpi: true
+
+  use_thin_strokes: false
+
+draw_bold_text_with_bright_colors: true
+
+key_bindings:
+  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
+
+shell:
+  program: /bin/zsh
+
+bell:
+  animation: EaseOutExpo
+  duration: 0
+  color: '#ffffff'
+
+background_opacity: 1.0
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  save_to_clipboard: true
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+mouse:
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
+  faux_scrolling_lines: 1
+  hide_when_typing: false
+
+cursor:
+  style: Block
+  unfocused_hollow: true
+
+
+live_config_reload: true
